@@ -12,9 +12,9 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import log_loss
 from sklearn.preprocessing import LabelEncoder
 
-os.makedirs("./data", exist_ok=True)
+os.makedirs("../data", exist_ok=True)
 logging.basicConfig(
-    filename="./data/log_file.log",
+    filename="../data/log_file.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
@@ -134,9 +134,9 @@ class My_Classifier_Model:
         )
         self.model.fit(X, y, cat_features=self.cat_features)
 
-        os.makedirs("./model", exist_ok=True)
-        joblib.dump(self.model, "./model/catboost_model.pkl")
-        joblib.dump(self.label_encoder, "./model/label_encoder.pkl")
+        os.makedirs("../model", exist_ok=True)
+        joblib.dump(self.model, "../model/catboost_model.pkl")
+        joblib.dump(self.label_encoder, "../model/label_encoder.pkl")
 
         logging.info("Training completed and model saved.")
         print("Model trained and saved!")
@@ -149,8 +149,8 @@ class My_Classifier_Model:
 
         X, _ = self.preprocess(df, training=False)
 
-        model = joblib.load("./model/catboost_model.pkl")
-        le = joblib.load("./model/label_encoder.pkl")
+        model = joblib.load("../model/catboost_model.pkl")
+        le = joblib.load("../model/label_encoder.pkl")
 
         preds = model.predict_proba(X)
 

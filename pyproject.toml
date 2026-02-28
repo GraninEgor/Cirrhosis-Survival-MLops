@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "liver-cirrhosis-model"
 version = "0.1.0"
-description = "Cirrhosis patient survival prediction using CatBoost and RandomForest"
-authors = ["Твоё Имя <email@example.com>"]
+description = "Cirrhosis patient survival prediction"
+authors = ["me"]
+packages = [
+    { include = "liver_cirrhosis_model" }
+]
 license = "MIT"
 readme = "README.md"
 
