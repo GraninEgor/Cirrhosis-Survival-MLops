@@ -201,21 +201,6 @@ liver_model predict --dataset /app/data/test.csv
 
 ---
 
-# Model Description
-
-The main model used in this project is:
-
-CatBoostClassifier
-
-Advantages:
-
-* native support for categorical features
-* strong performance on tabular data
-* robust to overfitting
-
-Hyperparameters are optimized using Optuna.
-
----
 
 # Evaluation Metric
 
