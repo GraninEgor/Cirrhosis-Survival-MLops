@@ -183,7 +183,7 @@ data/train.csv
 Run container:
 
 ```
-docker run -v $(pwd)/data:/app/data liver_model
+docker run -v $(pwd)/data:/app/data -e CLEARML_WEB_HOST=https://app.clear.ml -e CLEARML_API_HOST=https://api.clear.ml -e CLEARML_FILES_HOST=https://files.clear.ml -e CLEARML_API_ACCESS_KEY={ACCESS_KEY} -e CLEARML_API_SECRET_KEY={SECRET_KEY} liver_model
 ```
 
 This mounts your local `data` folder into the container.
@@ -193,10 +193,7 @@ This mounts your local `data` folder into the container.
 ## Run Prediction in Docker
 
 ```
-docker run \
--v $(pwd)/data:/app/data \
--v $(pwd)/model:/app/model \
-liver_model predict --dataset /app/data/test.csv
+docker run --rm -v $(pwd)/data:/app/data -v $(pwd)/model:/app/model liver_model predict --dataset /app/data/test.csv
 ```
 
 ---
