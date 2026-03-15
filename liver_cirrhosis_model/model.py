@@ -37,21 +37,24 @@ def get_logger():
 
 class My_Classifier_Model:
 
-    def __init__(self):
+    def __init__(self, mode):
+
         self.logger_py = get_logger()
 
-        # ClearML init
-        try:
-            self.task = Task.init(
-                project_name="LiverCirrhosis",
-                task_name="CatBoost_Training",
-                output_uri=None
-            )
-            self.logger = self.task.get_logger()
-        except Exception:
-            self.logger_py.exception("ClearML initialization failed")
-            self.task = None
-            self.logger = None
+        self.task = None
+        self.logger = None
+
+        if mode == "train":
+            try:
+                self.task = Task.init(
+                    project_name="LiverCirrhosis",
+                    task_name="CatBoost_Training",
+                    output_uri=None
+                )
+                self.logger = self.task.get_logger()
+
+            except Exception:
+                self.logger_py.exception("ClearML initialization failed")
 
         self.model = None
         self.label_encoder = LabelEncoder()
@@ -277,7 +280,7 @@ if __name__ == "__main__":
         parser.add_argument("--dataset", required=True)
         args = parser.parse_args()
 
-        model = My_Classifier_Model()
+        model = My_Classifier_Model(args.command)
         if args.command == "train":
             model.train(args.dataset)
         elif args.command == "predict":
